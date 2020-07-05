@@ -7,26 +7,25 @@ import time
 import sys
 
 # %% Establish time varibales
-#x=datetime.today()
-#print('Current datetime:',x.strftime('%H:%M:%S'))
-#y=x.replace(day=x.day, hour=18, minute=0, second=0, microsecond=0)
-#print('Target datetime:',y.strftime('%H:%M:%S'))
-#delta_t=y-x
-
+print('')
 while True:
     try:
-        delta_t = 3600*float(input("Please enter a delay time in decimal hours (e.g 1.5): "))
+        string = input('specify a delay time in format HH:MM:SS - ').split(':')
+        delay = datetime.timedelta(seconds = int(string[0])*3600 + int(string[1])*60 + int(string[2]))
+
     except ValueError:
-        #Some error in input
         print("Sorry, I didn't understand that input.")
-        continue
     else:
-        #delay successfully parsed
         break
 
-print('Time till target (hh:mm:ss):', datetime.timedelta(seconds = delta_t))
+# %% Summarise timelapse config to user
+print('')
+print(datetime.datetime.today().strftime('%H:%M:%S'), ' = current time')
+delay_str = str(delay)
+if len(delay_str) < 8: delay_str = '0'+delay_str
+print(delay_str, ' = time till target (hh:mm:ss) \n' )
 
 # %% Interface with GoPro API
 gpCam = GoProCamera.GoPro()
-t = Timer(delta_t, goprofunctions.starttimelapse, args = [gpCam])
+t = Timer(delay.seconds, goprofunctions.starttimelapse, args = [gpCam])
 t.start()
