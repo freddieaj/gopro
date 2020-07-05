@@ -11,5 +11,5 @@ def starttimelapse(gpCam):
 
     gpCam.overview() #Print a simple overview of camera
 
-    print('\nTimelapse initiated at', datetime.today().strftime('%Y-%m-%d'))
+    print('\nTimelapse initiated at', datetime.today().strftime('%H:%M:%S'), 'on', datetime.today().strftime('%Y-%m-%d'))
     gpCam.shutter(constants.start) #Starts capture
