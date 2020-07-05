@@ -2,7 +2,7 @@ from datetime import datetime
 from threading import Timer
 from goprocam import GoProCamera
 from goprocam import constants
-import starttimelapse
+import gopro-functions
 import time
 import sys
 
