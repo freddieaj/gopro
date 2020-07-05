@@ -8,16 +8,14 @@ import sys
 
 # %% Establish time varibales
 x=datetime.today()
-print('current datetime',x)
+print('Current datetime:',x.strftime('%H:%M:%S'))
 y=x.replace(day=x.day, hour=18, minute=0, second=0, microsecond=0)
-print('target datetime',y)
+print('Target datetime:',y.strftime('%H:%M:%S'))
 delta_t=y-x
 
-secs=delta_t.seconds+1
-print('time till target ',y-x)
-print(secs)
+print('Time till target (hh:mm:ss):',str(delta_t).split('.')[0])
 
 # %% Interface with GoPro API
 gpCam = GoProCamera.GoPro()
-t = Timer(5, starttimelapse.starttimelapse, args = [gpCam])
+t = Timer(delta_t.seconds, starttimelapse.starttimelapse, args = [gpCam])
 t.start()
